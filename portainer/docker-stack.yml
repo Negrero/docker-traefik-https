@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "9000"
+    networks:
+      - portainer-net
+    labels:
+      - "traefik.backend=portainer"
+      - "traefik.port=9000"
+      - "traefik.frontend.rule=Host:portainer.valdepeace.com"
+      - "traefik.enable=true"
+      - "traefik.protocol=http"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  portainer-net:
+     external:
+       name: traefik-proxy
