@@ -12,8 +12,8 @@ services:
       - traefik-net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      - $HOME/workspace/traefik/traefik.toml:/traefik.toml
-      - $HOME/workspace/traefik/acme.json:/acme.json
+      - $HOME/workspace/docker-traefik-https/traefik/traefik.toml:/traefik.toml
+      - $HOME/workspace/docker-traefik-https/traefik/acme.json:/acme.json
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:traefik.valdepeace.com
